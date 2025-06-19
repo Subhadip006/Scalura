@@ -61,7 +61,7 @@ export default function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-0 py-3 border-0 border-b border-gray-900 bg-transparent placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-0 text-gray-900"
+                className="w-full px-0 py-3 border-0 border-b border-black bg-transparent placeholder-gray-500 focus:border-gray-900 focus:outline-none focus:ring-0 text-gray-900"
                 required
               />
             </div>
@@ -90,7 +90,7 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-black border-gray-300 rounded focus:ring-black accent-black"
                 />
                 <span className="ml-2 text-sm text-gray-600">Remember for 30 days</span>
               </label>
