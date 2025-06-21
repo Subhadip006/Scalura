@@ -21,7 +21,7 @@ export function getMenuList(pathname) {
       ]
     },
     {
-      groupLabel: "SkillFlow Tools",
+      groupLabel: "SkillSync Tools",
       menus: [
         {
           href: "/skills",
