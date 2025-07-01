@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/Subhadip006/skillsync/internal/config"
-	"github.com/Subhadip006/skillsync/internal/models"
+	"github.com/Subhadip006/scalura/internal/config"
+	"github.com/Subhadip006/scalura/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
