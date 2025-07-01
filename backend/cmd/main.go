@@ -7,6 +7,7 @@ import (
 	"github.com/Subhadip006/scalura/internal/config"
 	"github.com/Subhadip006/scalura/internal/db"
 	authhandler "github.com/Subhadip006/scalura/internal/handlers/auth_handler"
+	skillhandler "github.com/Subhadip006/scalura/internal/handlers/skill_handler"
 	"github.com/Subhadip006/scalura/internal/repository"
 	"github.com/Subhadip006/scalura/internal/routes"
 	"github.com/Subhadip006/scalura/utils"
@@ -35,9 +36,15 @@ func main() {
 
 	authHandler := authhandler.NewAuthHandler(userRepo)
 
+	skillsRepo := repository.NewSkillRepository(db.DB)
+
+	skillHandler := skillhandler.NewSkillHandler(skillsRepo)
+
 	api := app.Group("/api")
 
 	routes.SetupAuthRoutes(api, authHandler)
+
+	routes.SetupSkillRoutes(api, skillHandler)
 
 	app.Listen(":8080")
 }
