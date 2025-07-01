@@ -9,5 +9,6 @@ func SetupSkillRoutes(router fiber.Router, handler *skillhandler.SkillHandler) {
 
 	skills := router.Group("/skills")
 
-	skills.Get("/:userID", handler.GetSkills)
+	skills.Get("/user/:userID", handler.GetSkills)
+	skills.Get("/:skillID", handler.GetSkillByID)
 }

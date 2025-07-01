@@ -26,3 +26,31 @@ func (h *SkillHandler) GetSkills(c *fiber.Ctx) error {
 		"skills": skills,
 	})
 }
+
+func (h *SkillHandler) GetSkillByID(c *fiber.Ctx) error {
+	skill_id_str := c.Params("skillID")
+
+	skill_id, err := uuid.Parse(skill_id_str)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Invalid skill ID format",
+		})
+	}
+
+	skill, err := h.Repo.GetSkillByID(skill_id)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Failed to fetch skill",
+		})
+	}
+
+	if skill == nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": "Skill not found",
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"skill": skill,
+	})
+}
