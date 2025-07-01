@@ -55,7 +55,12 @@ func (r *skillRepository) GetSkillByID(skillID uuid.UUID) (*models.Skill, error)
 }
 
 func (r *skillRepository) UpdateSkill(skill *models.Skill) error {
-	return r.DB.Save(skill).Error
+	var existing models.Skill
+	err := r.DB.First(&existing, "id = ?", skill.ID).Error
+	if err != nil {
+		return err
+	}
+	return r.DB.Model(&existing).Updates(skill).Error
 }
 
 func (r *skillRepository) DeleteSkill(skillID uuid.UUID) error {

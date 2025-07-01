@@ -11,4 +11,6 @@ func SetupSkillRoutes(router fiber.Router, handler *skillhandler.SkillHandler) {
 
 	skills.Get("/user/:userID", handler.GetSkills)
 	skills.Get("/:skillID", handler.GetSkillByID)
+	skills.Put("/:skillID", handler.UpdateSkill)
+	skills.Delete("/:skillID", handler.DeleteSkill)
 }
