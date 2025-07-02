@@ -12,4 +12,5 @@ func SetupGoalRoutes(router fiber.Router, handler *goalhandler.GoalHandler) {
 	goal.Get("/:goalID", handler.GetGoalByID)
 	goal.Put("/:goalID", handler.UpdateGoal)
 	goal.Delete("/:goalID", handler.DeleteGoal)
+	goal.Post("/", handler.CreateGoal)
 }
