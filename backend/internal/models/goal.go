@@ -8,7 +8,7 @@ import (
 
 type Goal struct {
 	ID          uuid.UUID `gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
-	SkillID     uuid.UUID
+	SkillID     uuid.UUID `json:"skill_id" gorm:"type:uuid"`
 	Title       string
 	Description string
 	TargetDate  time.Time
