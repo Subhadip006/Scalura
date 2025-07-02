@@ -9,6 +9,7 @@ import (
 	authhandler "github.com/Subhadip006/scalura/internal/handlers/auth_handler"
 	goalhandler "github.com/Subhadip006/scalura/internal/handlers/goal_handler"
 	skillhandler "github.com/Subhadip006/scalura/internal/handlers/skill_handler"
+	taskhandler "github.com/Subhadip006/scalura/internal/handlers/task_handler"
 	"github.com/Subhadip006/scalura/internal/repository"
 	"github.com/Subhadip006/scalura/internal/routes"
 	"github.com/Subhadip006/scalura/utils"
@@ -45,6 +46,10 @@ func main() {
 
 	goalHandler := goalhandler.NewGoalHandler(goalsRepo)
 
+	tasksRepo := repository.NewTaskRepository(db.DB)
+
+	taskHandler := taskhandler.NewTaskHandler(tasksRepo)
+
 	api := app.Group("/api")
 
 	routes.SetupAuthRoutes(api, authHandler)
@@ -52,6 +57,8 @@ func main() {
 	routes.SetupSkillRoutes(api, skillHandler)
 
 	routes.SetupGoalRoutes(api, goalHandler)
+
+	routes.SetupTaskRoutes(api, taskHandler)
 
 	app.Listen(":8080")
 }
