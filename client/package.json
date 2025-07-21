@@ -11,6 +11,8 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/solid-query": "^5.81.5",
+    "@tanstack/solid-query-devtools": "^5.83.0",
+    "axios": "^1.10.0",
     "solid-js": "^1.9.7",
     "tailwindcss": "^4.1.11"
   },
