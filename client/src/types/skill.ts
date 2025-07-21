@@ -1,6 +1,6 @@
 import type { Goal } from "./goal";
 
-export type skill = {
+export type Skill = {
     id: string;
     userID: string;
     Name: string;
@@ -10,3 +10,6 @@ export type skill = {
     goals: Goal[]
 
 }
+
+export type CreateSkillData = Omit<Skill, "id" | "createdAt" | "goals">;
+export type UpdateSkillData = Omit<Skill, "id" | "createdAt" | "goals" | "userID">;

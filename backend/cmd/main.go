@@ -14,6 +14,7 @@ import (
 	"github.com/Subhadip006/scalura/internal/routes"
 	"github.com/Subhadip006/scalura/utils"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -22,6 +23,7 @@ func main() {
 
 	baseURL := config.GetEnv("BASE_URL", "http://localhost:8080")
 	authSecret := config.GetEnv("AUTH_SECRET", "_")
+	frontendURL := config.GetEnv("FRONTEND_URL", "http://localhost:5173")
 
 	fmt.Println("base url is", baseURL)
 	fmt.Println("auth secret is", authSecret)
@@ -29,6 +31,13 @@ func main() {
 	db.Connect()
 
 	app := fiber.New()
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     frontendURL,
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
+		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
+		AllowCredentials: true,
+	}))
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Fiber is running")
