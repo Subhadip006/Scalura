@@ -7,10 +7,14 @@ import (
 	"github.com/Subhadip006/scalura/internal/config"
 	"github.com/Subhadip006/scalura/internal/db"
 	authhandler "github.com/Subhadip006/scalura/internal/handlers/auth_handler"
+	goalhandler "github.com/Subhadip006/scalura/internal/handlers/goal_handler"
+	skillhandler "github.com/Subhadip006/scalura/internal/handlers/skill_handler"
+	taskhandler "github.com/Subhadip006/scalura/internal/handlers/task_handler"
 	"github.com/Subhadip006/scalura/internal/repository"
 	"github.com/Subhadip006/scalura/internal/routes"
 	"github.com/Subhadip006/scalura/utils"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -19,6 +23,7 @@ func main() {
 
 	baseURL := config.GetEnv("BASE_URL", "http://localhost:8080")
 	authSecret := config.GetEnv("AUTH_SECRET", "_")
+	frontendURL := config.GetEnv("FRONTEND_URL", "http://localhost:5173")
 
 	fmt.Println("base url is", baseURL)
 	fmt.Println("auth secret is", authSecret)
@@ -26,6 +31,13 @@ func main() {
 	db.Connect()
 
 	app := fiber.New()
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     frontendURL,
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
+		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
+		AllowCredentials: true,
+	}))
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Fiber is running")
@@ -35,9 +47,27 @@ func main() {
 
 	authHandler := authhandler.NewAuthHandler(userRepo)
 
+	skillsRepo := repository.NewSkillRepository(db.DB)
+
+	skillHandler := skillhandler.NewSkillHandler(skillsRepo)
+
+	goalsRepo := repository.NewGoalsRepository(db.DB)
+
+	goalHandler := goalhandler.NewGoalHandler(goalsRepo)
+
+	tasksRepo := repository.NewTaskRepository(db.DB)
+
+	taskHandler := taskhandler.NewTaskHandler(tasksRepo)
+
 	api := app.Group("/api")
 
 	routes.SetupAuthRoutes(api, authHandler)
+
+	routes.SetupSkillRoutes(api, skillHandler)
+
+	routes.SetupGoalRoutes(api, goalHandler)
+
+	routes.SetupTaskRoutes(api, taskHandler)
 
 	app.Listen(":8080")
 }

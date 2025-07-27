@@ -2,6 +2,8 @@ module github.com/Subhadip006/scalura
 
 go 1.24.3
 
+require github.com/golang-jwt/jwt/v5 v5.2.2
+
 require (
 	cloud.google.com/go/compute/metadata v0.7.0 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
@@ -10,9 +12,8 @@ require (
 	github.com/go-pkgz/auth v1.25.1 // indirect
 	github.com/go-pkgz/repeater v1.2.0 // indirect
 	github.com/go-pkgz/rest v1.20.3 // indirect
-	github.com/gofiber/fiber/v2 v2.52.8 // indirect
+	github.com/gofiber/fiber/v2 v2.52.9 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -30,6 +31,7 @@ require (
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rrivera/identicon v0.0.0-20240116195454-d5ba35832c0d // indirect
+	github.com/rs/cors v1.11.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect

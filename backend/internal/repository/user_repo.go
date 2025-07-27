@@ -5,7 +5,6 @@ package repository
 import (
 	"errors"
 
-	"github.com/Subhadip006/scalura/internal/db"
 	"github.com/Subhadip006/scalura/internal/models"
 	"gorm.io/gorm"
 )
@@ -25,7 +24,7 @@ func NewUserRepository(db *gorm.DB) *userRepository {
 }
 
 func (r *userRepository) CreateUser(user *models.User) error {
-	return db.DB.Create(user).Error
+	return r.DB.Create(user).Error
 }
 
 func (r *userRepository) GetUserByEmail(email string) (*models.User, error) {
